@@ -9,4 +9,4 @@ its for starter developers not for users
 u must change codes to make it work no introduction  sorry u must find it yourself
 
 dependencies:
-powershell 3.0 
+powershell 1.0
